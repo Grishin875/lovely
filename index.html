@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вика, прости</title>
+<meta name="description" content="Маленькая страница с извинениями и 100 причинами любить Вику.">
+<meta property="og:title" content="Вика, прости">
+<meta property="og:description" content="И 100 причин любить тебя.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+<style>
+  :root{
+    --bg1:#fff6f8; --bg2:#ffe9f0; --bg3:#f1e9ff;
+    --ink:#2e1d2a; --ink-soft:#6b5463;
+    --accent:#e0577f; --accent-soft:#ffd7e3;
+    --card:rgba(255,255,255,.72); --card-brd:rgba(224,87,127,.16);
+    --shadow:0 10px 30px rgba(120,40,80,.10);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); background:var(--bg1);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-weight:400; line-height:1.65; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:''; position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(900px 600px at 15% -10%, var(--bg2) 0%, transparent 60%),
+      radial-gradient(800px 700px at 90% 10%, var(--bg3) 0%, transparent 55%),
+      radial-gradient(900px 800px at 50% 110%, #ffeef3 0%, transparent 60%),
+      var(--bg1);
+  }
+  /* плавающие сердечки */
+  #hearts{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden}
+  #hearts span{
+    position:absolute; bottom:-60px; color:var(--accent); opacity:0;
+    animation:float linear infinite; will-change:transform,opacity;
+  }
+  @keyframes float{
+    0%{transform:translateY(0) rotate(0deg) scale(.8); opacity:0}
+    10%{opacity:.5}
+    90%{opacity:.35}
+    100%{transform:translateY(-115vh) rotate(260deg) scale(1.1); opacity:0}
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px}
+
+  /* ── экран 1 ─────────────────────────── */
+  header.hero{
+    min-height:100svh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+    padding:80px 20px 40px;
+  }
+  .eyebrow{
+    font-size:13px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--accent); font-weight:500; margin:0 0 22px;
+  }
+  h1{
+    font-family:'Lora',Georgia,serif; font-weight:600;
+    font-size:clamp(46px,12vw,110px); line-height:1.02; margin:0;
+    letter-spacing:-.02em;
+  }
+  h1 em{font-style:italic; color:var(--accent); display:block}
+  .hero p{
+    max-width:30ch; font-size:clamp(16px,2.4vw,19px);
+    color:var(--ink-soft); margin:26px auto 0;
+  }
+  .scroll-hint{
+    margin-top:46px; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-soft); text-decoration:none; display:inline-flex;
+    flex-direction:column; align-items:center; gap:10px; opacity:.8;
+  }
+  .scroll-hint:hover{opacity:1}
+  .scroll-hint svg{animation:bob 2.2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+  /* ── письмо ──────────────────────────── */
+  .letter{padding:40px 0 90px}
+  .letter-card{
+    background:var(--card); backdrop-filter:blur(14px);
+    border:1px solid var(--card-brd); border-radius:26px;
+    padding:clamp(28px,5vw,56px); box-shadow:var(--shadow);
+    max-width:720px; margin:0 auto;
+  }
+  .letter-card h2{
+    font-family:'Lora',serif; font-weight:600; font-size:clamp(24px,4vw,34px);
+    margin:0 0 20px;
+  }
+  .letter-card p{font-size:clamp(15px,2.2vw,17.5px); color:#4a3542; margin:0 0 16px}
+  .letter-card p:last-of-type{margin-bottom:0}
+  .sign{
+    margin-top:28px; font-family:'Lora',serif; font-style:italic;
+    color:var(--accent); font-size:18px;
+  }
+  .cta{text-align:center; margin-top:44px}
+  .btn{
+    display:inline-block; border:0; cursor:pointer;
+    background:linear-gradient(135deg,#ff7fa4,#e0577f);
+    color:#fff; font-family:inherit; font-size:16px; font-weight:500;
+    padding:16px 34px; border-radius:100px; text-decoration:none;
+    box-shadow:0 10px 26px rgba(224,87,127,.35);
+    transition:transform .25s cubic-bezier(.34,1.3,.64,1), box-shadow .25s;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.02); box-shadow:0 16px 34px rgba(224,87,127,.42)}
+  .btn:active{transform:translateY(0) scale(.99)}
+
+  /* ── 100 причин ──────────────────────── */
+  .reasons{padding:70px 0 40px}
+  .sec-head{text-align:center; margin-bottom:46px}
+  .sec-head h2{
+    font-family:'Lora',serif; font-weight:600; margin:0;
+    font-size:clamp(32px,7vw,62px); line-height:1.08;
+  }
+  .sec-head h2 span{color:var(--accent)}
+  .sec-head p{color:var(--ink-soft); margin:14px 0 0}
+  .grid{
+    display:grid; gap:14px;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  }
+  .card{
+    background:var(--card); backdrop-filter:blur(10px);
+    border:1px solid var(--card-brd); border-radius:18px;
+    padding:20px 22px; display:flex; gap:14px; align-items:flex-start;
+    box-shadow:0 4px 14px rgba(120,40,80,.06);
+    opacity:0; transform:translateY(22px);
+    transition:opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1), box-shadow .25s;
+  }
+  .card.in{opacity:1; transform:none}
+  .card:hover{box-shadow:0 14px 30px rgba(120,40,80,.13); transform:translateY(-4px)}
+  .num{
+    flex:0 0 auto; min-width:34px; height:34px; border-radius:50%;
+    display:grid; place-items:center; background:var(--accent-soft);
+    color:var(--accent); font-size:13px; font-weight:600; font-variant-numeric:tabular-nums;
+  }
+  .card p{margin:4px 0 0; font-size:15.5px; color:#402d3a}
+
+  footer{
+    text-align:center; padding:70px 20px 90px; color:var(--ink-soft); font-size:15px;
+  }
+  footer .big{
+    font-family:'Lora',serif; font-size:clamp(22px,5vw,32px);
+    color:var(--ink); margin:0 0 10px; font-style:italic;
+  }
+  .pulse{display:inline-block; animation:pulse 1.6s ease-in-out infinite; color:var(--accent)}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important; transition:none!important}
+    .card{opacity:1; transform:none}
+  }
+  @media (max-width:520px){
+    .grid{grid-template-columns:1fr}
+    .card{padding:16px 18px}
+  }
+</style>
+</head>
+<body>
+<div id="hearts" aria-hidden="true"></div>
+
+<header class="hero">
+  <p class="eyebrow">для тебя</p>
+  <h1>Чета, Вика,<em>прости</em></h1>
+  <p>Я накосячил. Не хочу оправдываться — хочу, чтобы ты знала, как ты мне дорога.</p>
+  <a class="scroll-hint" href="#letter">
+    читать
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+  </a>
+</header>
+
+<section class="letter wrap" id="letter">
+  <div class="letter-card">
+    <h2>Короче, слушай…</h2>
+    <p>Я был неправ. Не буду придумывать красивые причины — их нет. Есть только то, что мне правда жаль, и что я это понял.</p>
+    <p>Ты не заслужила того, что я сделал. И самое обидное, что человек, которого я меньше всего хотел бы расстроить, — это именно ты.</p>
+    <p>Я не прошу сразу всё забыть. Просто прочитай то, что ниже. Я посчитал — получилось ровно сто. На самом деле их больше, просто сто красивее звучит.</p>
+    <p class="sign">Прости меня. Правда.</p>
+  </div>
+  <div class="cta">
+    <a class="btn" href="#reasons">100 причин любить тебя →</a>
+  </div>
+</section>
+
+<section class="reasons wrap" id="reasons">
+  <div class="sec-head">
+    <h2>100 причин<br>любить <span>Вику</span></h2>
+    <p>По одной на каждый день, когда я забывал сказать это вслух.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer>
+  <p class="big">Ты лучшее, что со мной случалось.</p>
+  <p>Сделано с <span class="pulse">♥</span> и виной</p>
+</footer>
+
+<script>
+const REASONS = [
+"За то, как ты улыбаешься, когда думаешь, что никто не видит",
+"За твой смех, который слышно через всю комнату",
+"За то, что с тобой даже молчать не неловко",
+"За то, как ты заправляешь прядь волос за ухо",
+"За твои глаза, в которых я каждый раз теряюсь",
+"За то, что ты умеешь слушать по-настоящему",
+"За твой голос, который я узнаю из тысячи",
+"За то, как ты злишься — смешно и ненадолго",
+"За то, что ты прощаешь дурака вроде меня",
+"За твою доброту, которую ты считаешь обычной",
+"За то, как ты радуешься мелочам",
+"За твои руки, которые всегда тёплые",
+"За то, что рядом с тобой я становлюсь лучше",
+"За твою честность, даже когда она колется",
+"За то, как ты поёшь, когда думаешь, что я не слышу",
+"За твоё упрямство — оно мне нравится",
+"За то, что ты не боишься быть собой",
+"За то, как ты обнимаешь — крепко и по-настоящему",
+"За твоё «доброе утро»",
+"За то, что ты помнишь то, что я сам забыл",
+"За твой почерк",
+"За то, как ты хмуришься, когда что-то читаешь",
+"За то, что с тобой любая дорога короче",
+"За твою заботу, которую ты прячешь за ворчанием",
+"За то, что ты умеешь мечтать вслух",
+"За твой вкус в музыке",
+"За то, как ты засыпаешь на середине фильма",
+"За то, что ты терпишь мои шутки",
+"За то, что иногда ты над ними всё-таки смеёшься",
+"За твою силу, о которой ты сама не догадываешься",
+"За то, как ты танцуешь на кухне",
+"За то, что ты никогда не бросаешь своих",
+"За твою искренность",
+"За то, как ты говоришь «я тебя поняла»",
+"За то, что ты не притворяешься",
+"За твою любовь к деталям",
+"За то, что рядом с тобой тихо внутри",
+"За то, как ты переживаешь за других",
+"За твою смелость начинать заново",
+"За то, что ты умеешь признавать свои ошибки",
+"За то, что учишь этому меня",
+"За твои сообщения посреди дня",
+"За то, как ты выбираешь подарки",
+"За твою фантазию",
+"За то, что ты не даёшь мне раскисать",
+"За твой характер — весь, целиком",
+"За то, как ты произносишь моё имя",
+"За то, что с тобой не страшно",
+"За твоё умение делать дом из любого места",
+"За то, что ты варишь чай, когда мне плохо",
+"За твои планы на будущее, в которых есть я",
+"За то, как ты смотришь на закат",
+"За твою любовь к животным",
+"За то, что ты не осуждаешь",
+"За твоё чувство юмора",
+"За то, как ты краснеешь от комплиментов",
+"За то, что ты умеешь ждать",
+"За твою верность",
+"За то, как ты держишь слово",
+"За то, что ты заступаешься за слабых",
+"За твою лёгкость",
+"За то, как ты вдохновляешь меня работать",
+"За то, что ты не сдаёшься",
+"За твой взгляд, когда ты о чём-то задумалась",
+"За то, как ты спорим — и потом миримся",
+"За твоё «спокойной ночи»",
+"За то, что ты рядом в плохие дни",
+"За то, что ты рядом и в хорошие",
+"За твою способность прощать",
+"За то, как ты замечаешь чужую боль",
+"За твою нежность",
+"За то, что ты не боишься плакать",
+"За твою уверенность, когда мне её не хватает",
+"За то, как ты готовишь",
+"За то, как ты смеёшься над своими же оговорками",
+"За твою любовь к порядку",
+"За то, что ты не любишь враньё",
+"За твою память на важное",
+"За то, как ты умеешь быть благодарной",
+"За твою тёплую сторону кровати",
+"За то, что ты моя точка спокойствия",
+"За то, как ты держишь меня за руку",
+"За твою привычку поправлять мне воротник",
+"За то, что ты веришь в меня",
+"За твой смех над старыми фотографиями",
+"За то, что ты не даёшь мне врать себе",
+"За твою любовь к жизни",
+"За то, как ты радуешься первому снегу",
+"За твою мягкость",
+"За то, что ты умеешь быть настоящим другом",
+"За твоё умение слушать тишину",
+"За то, что с тобой время идёт иначе",
+"За то, что ты делаешь обычный день особенным",
+"За твою улыбку по утрам",
+"За то, что ты никогда не была скучной",
+"За то, что ты выбрала меня",
+"За то, что осталась, когда было тяжело",
+"За то, что ты — Вика",
+"За всё, что я ещё не успел заметить",
+"За то, что после всего ты читаешь это до конца"
+];
+
+// карточки
+const grid = document.getElementById('grid');
+grid.innerHTML = REASONS.map((t,i)=>
+  `<article class="card"><span class="num">${i+1}</span><p>${t}</p></article>`
+).join('');
+
+// появление при скролле
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach((e,idx)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'), idx*45);
+      io.unobserve(e.target);
+    }
+  });
+},{rootMargin:'0px 0px -8% 0px', threshold:.05});
+document.querySelectorAll('.card').forEach(c=>io.observe(c));
+
+// сердечки
+const layer = document.getElementById('hearts');
+const GLYPHS = ['♥','♡','💗','💕'];
+for(let i=0;i<26;i++){
+  const s = document.createElement('span');
+  s.textContent = GLYPHS[Math.floor(Math.random()*GLYPHS.length)];
+  s.style.left = Math.random()*100 + '%';
+  s.style.fontSize = (11 + Math.random()*22) + 'px';
+  s.style.animationDuration = (14 + Math.random()*16) + 's';
+  s.style.animationDelay = (-Math.random()*26) + 's';
+  layer.appendChild(s);
+}
+</script>
+</body>
+</html>
